@@ -3,7 +3,8 @@ import { CharactersContext } from "../../providers/CharacterContext";
 import { UserContext } from "../../providers/UserContext";
 
 export const HomePage = () => {
-  const { triggerRefresh, renderCharacters } = useContext(CharactersContext);
+  const { triggerRefresh, renderCharacters, renderPages } =
+    useContext(CharactersContext);
   const { currentHouse } = useContext(UserContext);
   return (
     <>
@@ -14,6 +15,8 @@ export const HomePage = () => {
         Refresh
       </button>
       <ul>{renderCharacters()}</ul>
+
+      {renderPages()}
     </>
   );
 };

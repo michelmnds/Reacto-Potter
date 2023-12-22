@@ -11,6 +11,8 @@ const CharactersContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [needRefresh, setNeedRefresh] = useState(false);
   const [isStale, setIsStale] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const { currentHouse } = useContext(UserContext);
 
@@ -36,9 +38,19 @@ const CharactersContextProvider = ({ children }) => {
     }
   };
 
+  const calculatePages = () => {
+    if (characters) {
+      setTotalPages(Math.ceil(characters.length / 20));
+    }
+  };
+
   useEffect(() => {
     fetchCharacters();
   }, [currentHouse]);
+
+  useEffect(() => {
+    calculatePages();
+  }, [characters]);
 
   const getOneCharacter = (characterId) => {
     const oneCharacter = characters.find(
@@ -48,11 +60,13 @@ const CharactersContextProvider = ({ children }) => {
   };
 
   const renderCharacters = () => {
-    return characters.map((character) => (
-      <li key={character.id}>
-        <Link to={`/character/${character.id}`}>{character.name}</Link>
-      </li>
-    ));
+    return characters
+      .slice(0 + 20 * (currentPage - 1), 19 + 20 * (currentPage - 1))
+      .map((character) => (
+        <li key={character.id}>
+          <Link to={`/character/${character.id}`}>{character.name}</Link>
+        </li>
+      ));
   };
 
   const renderOneCharacter = () => {
@@ -62,6 +76,27 @@ const CharactersContextProvider = ({ children }) => {
         <img src={character.image} alt={character.name} />
         <p>House: {character.house}</p>
         {character.patronus && <p>Patronus animal: {character.patronus}</p>}
+      </>
+    );
+  };
+
+  const handlePageChange = (change) => {
+    if (currentPage + change > 0 && currentPage + change <= totalPages)
+      setCurrentPage(currentPage + change);
+  };
+  //still need to add conditional to only render pagination if there are more than 20 elements
+  const renderPages = () => {
+    return (
+      <>
+        <div>
+          <button type="button" onClick={() => handlePageChange(-1)}>
+            Previous Page
+          </button>
+          <p>{currentPage}</p>
+          <button type="button" onClick={() => handlePageChange(1)}>
+            Next Page
+          </button>
+        </div>
       </>
     );
   };
@@ -93,6 +128,7 @@ const CharactersContextProvider = ({ children }) => {
         renderCharacters,
         setCharacter,
         renderOneCharacter,
+        renderPages,
       }}
     >
       {children}
