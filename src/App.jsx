@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LandingPage } from "./pages/LandingPage";
-import { ProfilePage } from "./pages/ProfielPage";
+import { ProfilePage } from "./pages/ProfilePage";
 import { SingleCharacterPage } from "./pages/SingleCharacterPage";
 
 function App() {
