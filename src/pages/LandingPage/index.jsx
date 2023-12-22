@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./style.css";
 import { HouseContext } from "../../providers/HouseContext";
+import { Link } from "react-router-dom";
 // import { UserContext } from "../../providers/UserContext";
 
 export const LandingPage = () => {
@@ -8,10 +9,18 @@ export const LandingPage = () => {
 
   return (
     <div className="landingContainer">
-      <button onClick={handleClick}>Gryffindor</button>
-      <button onClick={handleClick}>Slytherin</button>
-      <button onClick={handleClick}>Ravenclaw</button>
-      <button onClick={handleClick}>Hufflepuff</button>
+      <button onClick={handleClick}>
+        <Link to="/home">Gryffindor</Link>
+      </button>
+      <button onClick={handleClick}>
+        <Link to="/home">Slytherin</Link>
+      </button>
+      <button onClick={handleClick}>
+        <Link to="/home">Ravenclaw</Link>
+      </button>
+      <button onClick={handleClick}>
+        <Link to="/home">Hufflepuff</Link>
+      </button>
     </div>
   );
 };

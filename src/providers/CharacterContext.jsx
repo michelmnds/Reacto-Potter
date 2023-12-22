@@ -1,21 +1,27 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-//import { HouseContext } from "../../providers/HouseContext";
+import { UserContext } from "./UserContext";
+import { Link } from "react-router-dom";
 
 export const CharactersContext = createContext();
 
 const CharactersContextProvider = ({ children }) => {
   const [characters, setCharacters] = useState([]);
+  const [character, setCharacter] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [needRefresh, setNeedRefresh] = useState(false);
   const [isStale, setIsStale] = useState(false);
-  const [house, setHouse] = useState(""); //use the value from housecontext once available
+
+  const { currentHouse } = useContext(UserContext);
 
   const fetchCharacters = async () => {
     try {
-      const response = await axios.get(
-        "https://hp-api.onrender.com/api/characters"
-      );
+      const response =
+        currentHouse === ""
+          ? await axios.get("https://hp-api.onrender.com/api/characters")
+          : await axios.get(
+              `https://hp-api.onrender.com/api/characters/house/${currentHouse}`
+            );
       if (response.status === 200) {
         setCharacters(response.data);
         setIsLoading(false);
@@ -32,13 +38,32 @@ const CharactersContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCharacters();
-  }, []); //watch house from house context
+  }, [currentHouse]);
 
   const getOneCharacter = (characterId) => {
     const oneCharacter = characters.find(
       (character) => character.id == characterId
     );
     return oneCharacter;
+  };
+
+  const renderCharacters = () => {
+    return characters.map((character) => (
+      <li key={character.id}>
+        <Link to={`/character/${character.id}`}>{character.name}</Link>
+      </li>
+    ));
+  };
+
+  const renderOneCharacter = () => {
+    return (
+      <>
+        <h1>{character.name}</h1>
+        <img src={character.image} alt={character.name} />
+        <p>House: {character.house}</p>
+        {character.patronus && <p>Patronus animal: {character.patronus}</p>}
+      </>
+    );
   };
 
   const triggerRefresh = () => {
@@ -65,6 +90,9 @@ const CharactersContextProvider = ({ children }) => {
         fetchCharacters,
         getOneCharacter,
         triggerRefresh,
+        renderCharacters,
+        setCharacter,
+        renderOneCharacter,
       }}
     >
       {children}

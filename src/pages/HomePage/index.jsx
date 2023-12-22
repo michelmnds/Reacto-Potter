@@ -1,35 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CharactersContext } from "../../providers/CharacterContext";
-import { Link } from "react-router-dom";
+import { UserContext } from "../../providers/UserContext";
 
 export const HomePage = () => {
-  const { characters, triggerRefresh } = useContext(CharactersContext);
-  const [house, setHouse] = useState("Slytherin");
+  const { triggerRefresh, renderCharacters } = useContext(CharactersContext);
+  const { currentHouse } = useContext(UserContext);
   return (
     <>
-      <h1>All characters</h1>
+      <h1>
+        All characters{currentHouse === "" ? "" : ` of house ${currentHouse}`}
+      </h1>
       <button type="button" onClick={triggerRefresh}>
         Refresh
       </button>
-      <ul>
-        {house === ""
-          ? characters.map((character) => (
-              <li key={character.id}>
-                <Link to={`/character/${character.id}`}>{character.name}</Link>
-              </li>
-            ))
-          : characters
-              .filter((character) => {
-                return character.house === house;
-              })
-              .map((character) => (
-                <li key={character.id}>
-                  <Link to={`/character/${character.id}`}>
-                    {character.name}
-                  </Link>
-                </li>
-              ))}
-      </ul>
+      <ul>{renderCharacters()}</ul>
     </>
   );
 };
