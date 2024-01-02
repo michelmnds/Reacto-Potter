@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export const CharactersContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 const CharactersContextProvider = ({ children }) => {
   const [characters, setCharacters] = useState([]);
   const [character, setCharacter] = useState({});
@@ -18,12 +19,15 @@ const CharactersContextProvider = ({ children }) => {
 
   const fetchCharacters = async () => {
     try {
-      const response =
-        currentHouse === ""
-          ? await axios.get("https://hp-api.onrender.com/api/characters")
-          : await axios.get(
-              `https://hp-api.onrender.com/api/characters/house/${currentHouse}`
-            );
+      let response = "";
+
+      currentHouse == null
+        ? (response = await axios.get(
+            "https://hp-api.onrender.com/api/characters"
+          ))
+        : (response = await axios.get(
+            `https://hp-api.onrender.com/api/characters/house/${currentHouse}`
+          ));
       if (response.status === 200) {
         setCharacters(response.data);
         setIsLoading(false);
@@ -43,10 +47,6 @@ const CharactersContextProvider = ({ children }) => {
       setTotalPages(Math.ceil(characters.length / 20));
     }
   };
-
-  useEffect(() => {
-    fetchCharacters();
-  }, [currentHouse]);
 
   useEffect(() => {
     calculatePages();
