@@ -10,11 +10,11 @@ export const HouseContextProvider = ({ children }) => {
   const { setCurrentHouse } = useContext(UserContext);
 
   const updateCurrentHouse = (e) => {
-    setCurrentHouse(e.target.innerHTML);
+    setCurrentHouse(e.target.innerText);
   };
 
   const handleClick = (e) => {
-    const house = e.target.innerHTML;
+    const house = e.target.innerText;
     localStorage.setItem("house", JSON.stringify(house));
     updateCurrentHouse(e);
   };
