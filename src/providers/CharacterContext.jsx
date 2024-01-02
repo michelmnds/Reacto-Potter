@@ -50,6 +50,7 @@ const CharactersContextProvider = ({ children }) => {
 
   useEffect(() => {
     calculatePages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characters]);
 
   const getOneCharacter = (characterId) => {
@@ -62,21 +63,177 @@ const CharactersContextProvider = ({ children }) => {
   const renderCharacters = () => {
     return characters
       .slice(0 + 20 * (currentPage - 1), 19 + 20 * (currentPage - 1))
-      .map((character) => (
-        <li key={character.id}>
-          <Link to={`/character/${character.id}`}>{character.name}</Link>
-        </li>
-      ));
+      .map((character) => {
+        //Render cards based on characters house (uses Switch)
+        switch (character.house) {
+          case "Slytherin":
+            return (
+              <li
+                style={{ borderRight: "5px solid #2a623d" }}
+                className="card"
+                key={character.id}
+              >
+                <div
+                  style={{
+                    borderLeft: "5px solid #2a623d",
+                    backgroundImage: `url(${character.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "top",
+                  }}
+                  alt={character.name}
+                  className="charImg"
+                />
+
+                <div className="charInfos">
+                  <Link
+                    style={{ color: "#2a623d" }}
+                    className="charName"
+                    to={`/character/${character.id}`}
+                  >
+                    {character.name}
+                  </Link>
+                  <span className="charHouse">
+                    <strong>House: </strong>
+                    {character.house}
+                  </span>
+                  {character.patronus && (
+                    <span className="charPatronus">
+                      <strong>Patronus animal: </strong>
+                      {character.patronus}
+                    </span>
+                  )}
+                </div>
+              </li>
+            );
+          case "Gryffindor":
+            return (
+              <li
+                style={{ borderRight: "5px solid #ae0001" }}
+                className="card"
+                key={character.id}
+              >
+                <div
+                  style={{
+                    borderLeft: "5px solid #ae0001",
+                    backgroundImage: `url(${character.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "top",
+                  }}
+                  alt={character.name}
+                  className="charImg"
+                />
+
+                <div className="charInfos">
+                  <Link
+                    style={{ color: "#ae0001" }}
+                    className="charName"
+                    to={`/character/${character.id}`}
+                  >
+                    {character.name}
+                  </Link>
+                  <span className="charHouse">
+                    <strong>House: </strong>
+                    {character.house}
+                  </span>
+                  {character.patronus && (
+                    <span className="charPatronus">
+                      <strong>Patronus animal: </strong>
+                      {character.patronus}
+                    </span>
+                  )}
+                </div>
+              </li>
+            );
+          case "Ravenclaw":
+            return (
+              <li
+                style={{ borderRight: "5px solid #222f5b" }}
+                className="card"
+                key={character.id}
+              >
+                <div
+                  style={{
+                    borderLeft: "5px solid #222f5b",
+                    backgroundImage: `url(${character.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "top",
+                  }}
+                  alt={character.name}
+                  className="charImg"
+                />
+
+                <div className="charInfos">
+                  <Link
+                    style={{ color: "#222f5b" }}
+                    className="charName"
+                    to={`/character/${character.id}`}
+                  >
+                    {character.name}
+                  </Link>
+                  <span className="charHouse">
+                    <strong>House: </strong>
+                    {character.house}
+                  </span>
+                  {character.patronus && (
+                    <span className="charPatronus">
+                      <strong>Patronus animal: </strong>
+                      {character.patronus}
+                    </span>
+                  )}
+                </div>
+              </li>
+            );
+          case "Hufflepuff":
+            return (
+              <li
+                style={{ borderRight: "5px solid #ecb939" }}
+                className="card"
+                key={character.id}
+              >
+                <div
+                  style={{
+                    borderLeft: "5px solid #ecb939",
+                    backgroundImage: `url(${character.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "top",
+                  }}
+                  alt={character.name}
+                  className="charImg"
+                />
+
+                <div className="charInfos">
+                  <Link
+                    style={{ color: "#ecb939" }}
+                    className="charName"
+                    to={`/character/${character.id}`}
+                  >
+                    {character.name}
+                  </Link>
+                  <span className="charHouse">
+                    <strong>House: </strong>
+                    {character.house}
+                  </span>
+                  {character.patronus && (
+                    <span className="charPatronus">
+                      <strong>Patronus animal: </strong>
+                      {character.patronus}
+                    </span>
+                  )}
+                </div>
+              </li>
+            );
+        }
+      });
   };
 
   const renderOneCharacter = () => {
     return (
-      <>
+      <div>
         <h1>{character.name}</h1>
         <img src={character.image} alt={character.name} />
         <p>House: {character.house}</p>
         {character.patronus && <p>Patronus animal: {character.patronus}</p>}
-      </>
+      </div>
     );
   };
 
@@ -88,13 +245,13 @@ const CharactersContextProvider = ({ children }) => {
   const renderPages = () => {
     return (
       <>
-        <div>
+        <div className="pageContainer">
           <button type="button" onClick={() => handlePageChange(-1)}>
-            Previous Page
+            &lt;
           </button>
           <p>{currentPage}</p>
           <button type="button" onClick={() => handlePageChange(1)}>
-            Next Page
+            &gt;
           </button>
         </div>
       </>
@@ -109,12 +266,14 @@ const CharactersContextProvider = ({ children }) => {
     if (needRefresh) {
       fetchCharacters();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [needRefresh]);
 
   useEffect(() => {
     if (location.pathname === "/characters" && isStale) {
       triggerRefresh();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
