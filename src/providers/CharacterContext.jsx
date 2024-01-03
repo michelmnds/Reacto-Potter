@@ -2,6 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "./UserContext";
 import { Link } from "react-router-dom";
+import ravenclaw from "../assets/ravenclaw.png";
+import hufflepuff from "../assets/hufflepuff.png";
+import slytherin from "../assets/slytherin.png";
+import gryffindor from "../assets/gryffindor.png";
 
 export const CharactersContext = createContext();
 
@@ -73,16 +77,29 @@ const CharactersContextProvider = ({ children }) => {
                 className="card"
                 key={character.id}
               >
-                <div
-                  style={{
-                    borderLeft: "5px solid #2a623d",
-                    backgroundImage: `url(${character.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "top",
-                  }}
-                  alt={character.name}
-                  className="charImg"
-                />
+                {character.image ? (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #2a623d",
+                      backgroundImage: `url(${character.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "top",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #2a623d",
+                      backgroundImage: `url(${slytherin})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                )}
 
                 <div className="charInfos">
                   <Link
@@ -112,16 +129,29 @@ const CharactersContextProvider = ({ children }) => {
                 className="card"
                 key={character.id}
               >
-                <div
-                  style={{
-                    borderLeft: "5px solid #ae0001",
-                    backgroundImage: `url(${character.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "top",
-                  }}
-                  alt={character.name}
-                  className="charImg"
-                />
+                {character.image ? (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #ae0001",
+                      backgroundImage: `url(${character.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "top",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #ae0001",
+                      backgroundImage: `url(${gryffindor})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                )}
 
                 <div className="charInfos">
                   <Link
@@ -151,16 +181,29 @@ const CharactersContextProvider = ({ children }) => {
                 className="card"
                 key={character.id}
               >
-                <div
-                  style={{
-                    borderLeft: "5px solid #222f5b",
-                    backgroundImage: `url(${character.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "top",
-                  }}
-                  alt={character.name}
-                  className="charImg"
-                />
+                {character.image ? (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #222f5b",
+                      backgroundImage: `url(${character.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "top",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #222f5b",
+                      backgroundImage: `url(${ravenclaw})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                )}
 
                 <div className="charInfos">
                   <Link
@@ -190,16 +233,29 @@ const CharactersContextProvider = ({ children }) => {
                 className="card"
                 key={character.id}
               >
-                <div
-                  style={{
-                    borderLeft: "5px solid #ecb939",
-                    backgroundImage: `url(${character.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "top",
-                  }}
-                  alt={character.name}
-                  className="charImg"
-                />
+                {character.image ? (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #ecb939",
+                      backgroundImage: `url(${character.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "top",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      borderLeft: "5px solid #ecb939",
+                      backgroundImage: `url(${hufflepuff})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                )}
 
                 <div className="charInfos">
                   <Link
