@@ -1,0 +1,35 @@
+.quizQuestion {
+  text-align: center;
+}
+
+.quizAnswersCtn {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.quizAnswerCard {
+  border: 0.15rem solid #b36900;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0 1rem;
+  text-align: center;
+}
+
+.resultEmblem {
+  width: 250px;
+}
+
+@media (width >= 768px) {
+  .quizAnswersCtn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    justify-content: center;
+    align-content: center;
+    width: fit-content;
+    margin: 5rem auto;
+  }
+}
