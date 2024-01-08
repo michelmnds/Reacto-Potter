@@ -19,13 +19,17 @@ const CharactersContextProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const { currentHouse } = useContext(UserContext);
+  const { setCurrentHouse, currentHouse } = useContext(UserContext);
 
   const fetchCharacters = async () => {
     try {
       let response = "";
 
-      currentHouse == null
+      const userHouse = localStorage.getItem("house");
+      JSON.parse(userHouse);
+      setCurrentHouse(JSON.parse(userHouse));
+
+      userHouse == null
         ? (response = await axios.get(
             "https://hp-api.onrender.com/api/characters"
           ))

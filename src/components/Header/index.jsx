@@ -13,7 +13,7 @@ export const Header = () => {
         <Link to="/home">
           <img className="home" src={home} alt="" />
         </Link>
-        <Link to="/">
+        <Link to="/" onClick={() => localStorage.clear()}>
           <img className="logout" src={logout} alt="" />
         </Link>
       </div>

@@ -10,6 +10,8 @@
 
 
     border-bottom: 3px solid  rgb(179, 105, 0);
+
+    z-index: +1;
 }
 
 .logo{
