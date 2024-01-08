@@ -97,6 +97,17 @@ export const QuizContextProvider = ({ children }) => {
     },
   ];
 
+  const resultDescription = {
+    Gryffindor:
+      "You are bold, passionate, and brave. You have a highly-defined sense of right and wrong, and you are not afraid to speak your mind or fight for what you want. Some of the wizarding world's best-known members of house Gryffindor are: Minerva McGonagall, Remus Lupin, Hermione Granger, Order of the Phoenix founder Albus Dumbledore, and of course, Harry Potter!",
+    Slytherin:
+      "You are sneaky, resourceful, and not afraid to bend the rules to your advantage. You consistently strive to get ahead, and will do everything you can to be in a position of power. Famous witches and wizards of house Slytherin have included: Professor Severus Snape, Professor Horace Slughorn, Bellatrix Lestrange, Draco Malfoy, and even he-who-must-not-be-named, Tom Riddle, aka Lord Voldemort himself!",
+    Ravenclaw:
+      "You are wise, perceptive, and quietly brilliant. You may not always be noticed right away, but you are widely respected for your humor and brains. Notable students who the sorting hat has placed in house Ravenclaw include: Luna Lovegood, wand shop founder Garrick Ollivander, and the inventor of Floo powder, Ignatia Wildsmith.",
+    Hufflepuff:
+      "You are reserved, rational, and down-to-earth. You work well with others, are a great team player, and you always take a stand against injustice. Honorable Hufflepuffs throughout history have included: Cedric Diggory, Professor Pomona Sprout, and many years ago - Newton 'Newt' Scamander, the well-known author of Fantastic Beasts and Where to Find Them.",
+  };
+
   return (
     <QuizContext.Provider
       value={{
@@ -105,6 +116,7 @@ export const QuizContextProvider = ({ children }) => {
         currentQuizPage,
         setCurrentQuizPage,
         quiz,
+        resultDescription,
       }}
     >
       {children}

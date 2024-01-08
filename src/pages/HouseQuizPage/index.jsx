@@ -2,10 +2,11 @@ import { Link, useParams } from "react-router-dom";
 import { QuizContext } from "../../providers/QuizContext";
 import { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
+import "./style.css";
 
 export const HouseQuizPage = () => {
   const { quizpage } = useParams();
-  const { quiz } = useContext(QuizContext);
+  const { quiz, setCurrentQuizPage } = useContext(QuizContext);
   const [answerOrder, setAnswerOrder] = useState([
     "gryffindorAnswer",
     "slytherinAnswer",
@@ -14,10 +15,11 @@ export const HouseQuizPage = () => {
   ]);
   //ensures navigation to next quiz question and after 10 total questions sends user to results page
   const nextPage = quizpage < 10 ? parseInt(quizpage) + 1 : "results";
+  //stores current page to allow for navigation back onto the quizpage at a later stage
+  setCurrentQuizPage(quizpage);
 
   //randomizes order of answers
   const randomizeAnswers = () => {
-    console.log("test");
     const randomAnswerOrder = answerOrder;
     for (let i = randomAnswerOrder.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -42,25 +44,25 @@ export const HouseQuizPage = () => {
       {quizpage === "results" ? (
         <p>Your House is ...</p>
       ) : (
-        <div>
-          <h2>{quiz[quizpage - 1].question} </h2>
-          <ol>
-            <Link to={`/quiz/${nextPage}`}>
-              <li>{quiz[quizpage - 1][answerOrder[0]]}</li>
+        <div className="quizCtn">
+          <h2 className="quizQuestion">{quiz[quizpage - 1].question} </h2>
+          <div className="quizAnswersCtn">
+            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
+              {quiz[quizpage - 1][answerOrder[0]]}
             </Link>
 
-            <Link to={`/quiz/${nextPage}`}>
-              <li>{quiz[quizpage - 1][answerOrder[1]]}</li>
+            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
+              {quiz[quizpage - 1][answerOrder[1]]}
             </Link>
 
-            <Link to={`/quiz/${nextPage}`}>
-              <li>{quiz[quizpage - 1][answerOrder[2]]}</li>
+            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
+              {quiz[quizpage - 1][answerOrder[2]]}
             </Link>
 
-            <Link to={`/quiz/${nextPage}`}>
-              <li>{quiz[quizpage - 1][answerOrder[3]]}</li>
+            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
+              {quiz[quizpage - 1][answerOrder[3]]}
             </Link>
-          </ol>
+          </div>
         </div>
       )}
     </>
