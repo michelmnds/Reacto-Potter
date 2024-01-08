@@ -1,18 +1,53 @@
 import { Link, useParams } from "react-router-dom";
 import { QuizContext } from "../../providers/QuizContext";
+import { HouseContext } from "../../providers/HouseContext";
 import { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import "./style.css";
+import gryffindor from "../../assets/gryffindor.png";
+import slytherin from "../../assets/slytherin.png";
+import hufflepuff from "../../assets/hufflepuff.png";
+import ravenclaw from "../../assets/ravenclaw.png";
 
 export const HouseQuizPage = () => {
   const { quizpage } = useParams();
-  const { quiz, setCurrentQuizPage } = useContext(QuizContext);
+  const {
+    quiz,
+    setCurrentQuizPage,
+    handleQuizAnswer,
+    resetQuizState,
+    selectedHouse,
+    calculateQuizResults,
+    resultDescription,
+    resultsVisibility,
+    setResultsVisibility,
+  } = useContext(QuizContext);
+  const { handleClick } = useContext(HouseContext);
   const [answerOrder, setAnswerOrder] = useState([
     "gryffindorAnswer",
     "slytherinAnswer",
     "ravenclawAnswer",
-    "huffelpuffAnswer",
+    "hufflepuffAnswer",
   ]);
+
+  const displayQuizResults = () => {
+    calculateQuizResults();
+    setResultsVisibility(true);
+  };
+  //sets correct image source to render image after quiz
+  const showSelectedHouse = () => {
+    if (selectedHouse === "gryffindor") {
+      return gryffindor;
+    } else if (selectedHouse === "slytherin") {
+      return slytherin;
+    } else if (selectedHouse === "hufflepuff") {
+      return hufflepuff;
+    } else if (selectedHouse === "ravenclaw") {
+      return ravenclaw;
+    }
+  };
+
+  const quizIndex = quizpage - 1;
   //ensures navigation to next quiz question and after 10 total questions sends user to results page
   const nextPage = quizpage < 10 ? parseInt(quizpage) + 1 : "results";
   //stores current page to allow for navigation back onto the quizpage at a later stage
@@ -39,28 +74,75 @@ export const HouseQuizPage = () => {
   return (
     <>
       <Header />
-      {/*Either create logic to render results in quiz context or create separate context - also classes needed to style different answers
-      --also: idea to randomize order of 4 answer options - make create randomizer function */}
+      {/*Logic to either render the results page or individual quiz pages depending on the parems */}
       {quizpage === "results" ? (
-        <p>Your House is ...</p>
+        <div>
+          {/*displays button until clicked, then displays the results */}
+          {resultsVisibility ? (
+            <div>
+              <Link to="/home">
+                <img
+                  className="resultEmblem"
+                  src={showSelectedHouse()}
+                  alt={`${selectedHouse.toUpperCase()}`}
+                  onClick={handleClick}
+                />
+              </Link>
+
+              <p className="resultsText">
+                Your House is {selectedHouse}. Click on the emblem to join your
+                the house!
+              </p>
+              <p>{resultDescription[selectedHouse]}</p>
+            </div>
+          ) : (
+            <button
+              className="resultsBtn"
+              type="button"
+              onClick={displayQuizResults}
+            >
+              Calculate Results
+            </button>
+          )}
+
+          <Link to={`/quiz/1`} onClick={resetQuizState}>
+            I am not happy with the house I got and would like to start over
+          </Link>
+        </div>
       ) : (
         <div className="quizCtn">
-          <h2 className="quizQuestion">{quiz[quizpage - 1].question} </h2>
+          <h2 className="quizQuestion">{quiz[quizIndex].question} </h2>
           <div className="quizAnswersCtn">
-            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
-              {quiz[quizpage - 1][answerOrder[0]]}
+            <Link
+              className="quizAnswerCard"
+              onClick={() => handleQuizAnswer(answerOrder[0], quizIndex)}
+              to={`/quiz/${nextPage}`}
+            >
+              {quiz[quizIndex][answerOrder[0]]}
             </Link>
 
-            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
-              {quiz[quizpage - 1][answerOrder[1]]}
+            <Link
+              className="quizAnswerCard"
+              onClick={() => handleQuizAnswer(answerOrder[1], quizIndex)}
+              to={`/quiz/${nextPage}`}
+            >
+              {quiz[quizIndex][answerOrder[1]]}
             </Link>
 
-            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
-              {quiz[quizpage - 1][answerOrder[2]]}
+            <Link
+              className="quizAnswerCard"
+              onClick={() => handleQuizAnswer(answerOrder[2], quizIndex)}
+              to={`/quiz/${nextPage}`}
+            >
+              {quiz[quizIndex][answerOrder[2]]}
             </Link>
 
-            <Link className="quizAnswerCard" to={`/quiz/${nextPage}`}>
-              {quiz[quizpage - 1][answerOrder[3]]}
+            <Link
+              className="quizAnswerCard"
+              onClick={() => handleQuizAnswer(answerOrder[3], quizIndex)}
+              to={`/quiz/${nextPage}`}
+            >
+              {quiz[quizIndex][answerOrder[3]]}
             </Link>
           </div>
         </div>
