@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { QuizContext } from "../../providers/QuizContext";
 import { useContext, useEffect, useState } from "react";
+import { Header } from "../../components/Header";
 
 export const HouseQuizPage = () => {
   const { quizpage } = useParams();
@@ -35,6 +36,7 @@ export const HouseQuizPage = () => {
 
   return (
     <>
+      <Header />
       {/*Either create logic to render results in quiz context or create separate context - also classes needed to style different answers
       --also: idea to randomize order of 4 answer options - make create randomizer function */}
       {quizpage === "results" ? (
