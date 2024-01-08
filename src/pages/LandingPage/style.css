@@ -1,10 +1,188 @@
 .landingContainer{
-    width: 100vw;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+    
+}
+.selectInfos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.choiceContainer{
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+.selectTitle{
+    text-align: center;
+
+    font-size: 24px;
+    font-weight: bolder;
+}
+.selectOr{
+    margin-bottom: 6px;
+}
+.selectContainer{
+    height: 300px;
+    width: 100%;
 
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.gryffindor{
+    background-color: #740001;
+    border-top: 4px solid #ae0001;
+    border-bottom: 4px solid #ae0001;
+
+    background-image: url('../../assets/gryffindor-char.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transition: 0.2s;
+    
+}
+.slytherin{
+    background-color: #1a472a;
+    border-top: 4px solid #2a623d;
+    border-bottom: 4px solid #2a623d;
+
+    background-image: url('../../assets/slytherin-char.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.hufflepuff{
+    background-color: #ecb939;
+    border-top: 4px solid #f0c75e;
+    border-bottom: 4px solid #f0c75e;
+
+    background-image: url('../../assets/hufflepuff-char.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.ravenclaw{
+    background-color: #0e1a40;
+    border-top: 4px solid #222f5b;
+    border-bottom: 4px solid #222f5b;
+
+    background-image: url('../../assets/ravenclaw-char.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.emblem {
+    transition: 0.2s;
+    width: 150px;
+  }  
+.emblem:hover {
+    transition: 0.2s;
+    transform: scale(0.8);
+}
+.btnContainer{
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 20px;
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+.btnSelect {
+    font-size: 12px;
+    width: 220px;
+
+}
+@media(width >= 768px){
+    .landingContainer{
+        display: flex;
+        flex-direction: column;
+    
+        align-items: center;
+        justify-content: space-between;
+        
+        height: 100vh;
+
+        gap: 20px;
+    }
+    
+    .choiceContainer{
+        width: 100%;
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    
+        align-items: center;
+        justify-content: center;
+    }
+    .selectContainer{
+        width: 50%;
+    }
+    .btnContainer{
+        flex-direction: row;
+    }
+    .selectTitle{
+        margin-top: 11px;
+    }
+}
+@media(width >= 1024px){
+    .selectInfos{
+        padding: 20px;
+    }
+    .landingContainer{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .choiceContainer{
+        width: 100%;
+        height: 100vh;
+
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
+    .selectContainer{
+        width: 50%;
+        height: 100vh
+    }
+    .btnContainer{
+        flex-direction: column;
+    }
+    .btnSelect{
+        width: 320px;
+        font-size: 18px;
+    }
+}
+@media(width >= 1440px){
+   .choiceContainer{
+    width: 100%;
+   }
+
+}
+@media(width >= 1920px){
+    .selectInfos{
+        padding: 100px;
+    }
+
+    .choiceContainer{
+        width: 100%;
+    } 
+    .emblem{
+        width: 200px;
+    }
 }

@@ -21,7 +21,9 @@ export const HomePage = () => {
 
       <h1 className="title">
         All characters
-        {currentHouse === null ? "" : ` of house ${currentHouse}`}
+        {currentHouse === null || currentHouse === "none"
+          ? ""
+          : ` of house ${currentHouse}`}
       </h1>
       {/* <button type="button" onClick={triggerRefresh}>
         Refresh
