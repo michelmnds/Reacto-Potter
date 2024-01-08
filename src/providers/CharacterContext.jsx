@@ -93,8 +93,9 @@ const CharactersContextProvider = ({ children }) => {
                     style={{
                       borderLeft: "5px solid #2a623d",
                       backgroundImage: `url(${slytherin})`,
-                      backgroundSize: "cover",
+                      backgroundSize: 80,
                       backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
                     }}
                     alt={character.name}
                     className="charImg"
@@ -145,8 +146,9 @@ const CharactersContextProvider = ({ children }) => {
                     style={{
                       borderLeft: "5px solid #ae0001",
                       backgroundImage: `url(${gryffindor})`,
-                      backgroundSize: "cover",
+                      backgroundSize: 80,
                       backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
                     }}
                     alt={character.name}
                     className="charImg"
@@ -197,8 +199,9 @@ const CharactersContextProvider = ({ children }) => {
                     style={{
                       borderLeft: "5px solid #222f5b",
                       backgroundImage: `url(${ravenclaw})`,
-                      backgroundSize: "cover",
+                      backgroundSize: 80,
                       backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
                     }}
                     alt={character.name}
                     className="charImg"
@@ -249,8 +252,9 @@ const CharactersContextProvider = ({ children }) => {
                     style={{
                       borderLeft: "5px solid #ecb939",
                       backgroundImage: `url(${hufflepuff})`,
-                      backgroundSize: "cover",
+                      backgroundSize: 80,
                       backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
                     }}
                     alt={character.name}
                     className="charImg"
