@@ -30,7 +30,6 @@ export const HouseContextProvider = ({ children }) => {
         console.error("Error fetching houses:", error);
       }
     };
-
     getAllHouses();
   }, []);
 
