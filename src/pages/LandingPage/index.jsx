@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./style.css";
 import { HouseContext } from "../../providers/HouseContext";
+import { QuizContext } from "../../providers/QuizContext";
 import { Link } from "react-router-dom";
 import gryffindor from "../../assets/gryffindor.png";
 import slytherin from "../../assets/slytherin.png";
@@ -11,6 +12,7 @@ import { Header } from "../../components/Header";
 
 export const LandingPage = () => {
   const { handleClick } = useContext(HouseContext);
+  const { currentQuizPage } = useContext(QuizContext);
 
   return (
     <>
@@ -34,7 +36,7 @@ export const LandingPage = () => {
               <button className="btnSelect">Show me all characters</button>
             </Link>
 
-            <Link to="/quiz/1">
+            <Link to={`/quiz/${currentQuizPage}`}>
               <button className="btnSelect">
                 I don&apos;t know wich one to choose
               </button>
