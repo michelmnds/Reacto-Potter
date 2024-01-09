@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LandingPage } from "./pages/LandingPage";
-import { HousePage } from "./pages/HouasePage";
+import { HousePage } from "./pages/HousePage";
 import { SingleCharacterPage } from "./pages/SingleCharacterPage";
 import { HouseQuizPage } from "./pages/HouseQuizPage";
 
