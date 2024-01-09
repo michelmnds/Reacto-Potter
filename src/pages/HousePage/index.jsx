@@ -16,8 +16,13 @@ export const HousePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const [houseIdToBeUpdated, setHouseIdToBeUpdated] = useState(0);
+  const [houseName, setHouseName] = useState("");
+  const [houseImage, setHouseImage] = useState("");
+
   //should take "create" or "update"
-  const handleOpenModal = (type, houseChangeId) => {
+  const handleOpenModal = (type, houseChangeId, name, image) => {
+    setHouseName(name);
+    setHouseImage(image);
     setModalType(type);
     setHouseIdToBeUpdated(houseChangeId);
     setIsModalOpen(true);
@@ -69,7 +74,14 @@ export const HousePage = () => {
                         className="icon"
                         src={info}
                         alt="update house"
-                        onClick={() => handleOpenModal("update", house.id)}
+                        onClick={() =>
+                          handleOpenModal(
+                            "update",
+                            house.id,
+                            house.name,
+                            house.image
+                          )
+                        }
                       />
                       <img
                         className="icon"
@@ -100,6 +112,8 @@ export const HousePage = () => {
           handleCloseModal={handleCloseModal}
           modalType={modalType}
           houseIdToBeUpdated={houseIdToBeUpdated}
+          houseName={houseName}
+          houseImage={houseImage}
         />
       </div>
     </>

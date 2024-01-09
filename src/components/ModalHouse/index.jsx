@@ -9,10 +9,12 @@ export const ModalHouse = ({
   handleCloseModal,
   modalType,
   houseIdToBeUpdated,
+  houseName,
+  houseImage,
 }) => {
   const { createHouse, editHouse } = useContext(HouseContext);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     if (modalType === "create") {
       createHouse(data);
@@ -22,13 +24,26 @@ export const ModalHouse = ({
 
     handleCloseModal();
   };
-  //event.target.key for getting id from the house card
+
+  const defaultValues =
+    modalType === "update"
+      ? { name: `${houseName}`, image: `${houseImage}` }
+      : { name: "", image: "" };
+
+  const handleInitialValue = () => {
+    if (modalType === "create") {
+      reset();
+    } else if (modalType === "update") {
+      reset();
+    }
+  };
 
   return (
     <>
       <ReactModal
         isOpen={isModalOpen}
         shouldCloseOnOverlayClick={true}
+        onAfterOpen={handleInitialValue}
         onRequestClose={handleCloseModal}
         style={{
           content: {
@@ -44,12 +59,12 @@ export const ModalHouse = ({
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            defaultValue=""
+            defaultValue={defaultValues.name}
             {...register("name")}
             placeholder="House Name"
           />
           <input
-            defaultValue=""
+            defaultValue={defaultValues.image}
             {...register("image")}
             placeholder="House Image Link"
           />
