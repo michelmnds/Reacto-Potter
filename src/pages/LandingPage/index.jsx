@@ -8,15 +8,12 @@ import slytherin from "../../assets/slytherin.png";
 import hufflepuff from "../../assets/hufflepuff.png";
 import ravenclaw from "../../assets/ravenclaw.png";
 
-import { Header } from "../../components/Header";
-
 export const LandingPage = () => {
   const { handleClick } = useContext(HouseContext);
   const { currentQuizPage } = useContext(QuizContext);
 
   return (
     <>
-      <Header />
       <div className="landingContainer">
         <div className="selectInfos">
           <span className="selectTitle">

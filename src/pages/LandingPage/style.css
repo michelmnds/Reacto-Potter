@@ -119,19 +119,6 @@
         gap: 20px;
     }
     
-    .choiceContainer{
-        width: 100%;
-        
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    
-        align-items: center;
-        justify-content: center;
-    }
-    .selectContainer{
-        width: 50%;
-    }
     .btnContainer{
         flex-direction: row;
     }
@@ -142,6 +129,17 @@
 @media(width >= 1024px){
     .selectInfos{
         padding: 20px;
+    }
+    .choiceContainer{
+        width: 100%;
+        height: 100vh;
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        justify-content: flex-end;
+        align-items: flex-start;
     }
     .landingContainer{
         flex-direction: row;
