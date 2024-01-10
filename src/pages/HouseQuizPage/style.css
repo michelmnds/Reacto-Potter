@@ -28,23 +28,101 @@
   transform: scale(1.02);
 }
 
-.resultsButton {
-  border: 0.15rem solid #b36900;
-  border-radius: 1rem;
-  padding: 1rem;
-  margin: 1rem 1rem;
-  text-align: center;
-  font-size: 1.5rem;
-  color: #b36900;
-  background-color: #0e0e0e;
-}
-
 .resultEmblem {
   width: 250px;
+  margin: 1rem 0;
+  transition: transform 0.3s ease;
+}
+
+.resultEmblem:hover {
+  transform: scale(1.05);
+}
+
+.sortingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  text-align: center;
+  font-size: 2rem;
+  color: #b36900;
+}
+
+.resultsText {
+  max-width: 80vw;
+}
+
+.resultsDescription {
+  max-width: 80vw;
+}
+
+@keyframes moveHat {
+  0% {
+    transform: translateX(0);
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(100%);
+  }
+  30% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    transform: translateY(-100%);
+  }
+
+  70% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+    transform: translateY(0);
+  }
+}
+
+.movingSortingHatImg {
+  animation: moveHat 3s ease forwards;
+}
+
+.sortingHatImg {
+  transition: transform 0.3s ease;
+  width: 20rem;
+  cursor: pointer;
+}
+
+.sortingHatImg:hover {
+  transform: scale(1.4);
 }
 
 .mainPageContainer {
   min-height: 100vh;
+}
+
+.resultsContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.quizResetLink {
+  border: 0.15rem solid #b36900;
+  border-radius: 1rem;
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #b36900;
+  background-color: #0e0e0e;
+  transition: transform 0.3s ease;
+}
+
+.quizResetLink:hover {
+  color: #b36900;
+  transform: scale(1.05);
 }
 
 @media (width >= 768px) {

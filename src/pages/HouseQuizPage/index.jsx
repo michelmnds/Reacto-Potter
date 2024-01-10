@@ -8,6 +8,7 @@ import gryffindor from "../../assets/gryffindor.png";
 import slytherin from "../../assets/slytherin.png";
 import hufflepuff from "../../assets/hufflepuff.png";
 import ravenclaw from "../../assets/ravenclaw.png";
+import sortingHat from "../../assets/sortinghat.png";
 import { Footer } from "../../components/Footer";
 
 export const HouseQuizPage = () => {
@@ -72,6 +73,23 @@ export const HouseQuizPage = () => {
     randomizeAnswers();
   }, [quizpage]);
 
+  const [isHatClicked, setIsHatClicked] = useState(false);
+
+  const handleHatClick = () => {
+    if (!isHatClicked) {
+      setTimeout(() => {
+        displayQuizResults();
+        setIsHatClicked(false);
+      }, 3000);
+    }
+    setIsHatClicked(true);
+  };
+
+  const capitalizeFirstLetter = (string) => {
+    const capStr = string[0].toUpperCase() + string.slice(1);
+    return capStr;
+  };
+
   return (
     <>
       <Header />
@@ -81,7 +99,7 @@ export const HouseQuizPage = () => {
           <div>
             {/*displays button until clicked, then displays the results */}
             {resultsVisibility ? (
-              <div>
+              <div className="resultsContainer">
                 <Link to="/home">
                   <img
                     className="resultEmblem"
@@ -92,24 +110,34 @@ export const HouseQuizPage = () => {
                 </Link>
 
                 <p className="resultsText">
-                  Your House is {selectedHouse}. Click on the emblem to join
-                  your the house!
+                  Your House is {capitalizeFirstLetter(selectedHouse)}. Click on
+                  the emblem to join your the house!
                 </p>
-                <p>{resultDescription[selectedHouse]}</p>
-                <Link to={`/quiz/1`} onClick={resetQuizState}>
-                  I am not happy with the house I got and would like to start
-                  over
+                <p className="resultsDescription">
+                  {resultDescription[selectedHouse]}
+                </p>
+                <Link
+                  className="quizResetLink"
+                  to={`/quiz/1`}
+                  onClick={resetQuizState}
+                >
+                  Reset Quiz!
                 </Link>
               </div>
             ) : (
-              <button
-                className="resultsBtn"
-                type="button"
-                onClick={displayQuizResults}
-              >
-                Calculate Results
-              </button>
+              <div className="sortingContainer">
+                <img
+                  className={`sortingHatImg ${
+                    isHatClicked ? "movingSortingHatImg" : ""
+                  }`}
+                  src={sortingHat}
+                  alt="Sorting Hat"
+                  onClick={handleHatClick}
+                />
+                <p>The sorting hat will reveal your assigned house.</p>
+              </div>
             )}
+            {/* hatimg onclick displayQuizResults */}
           </div>
         ) : (
           <div className="quizCtn">
