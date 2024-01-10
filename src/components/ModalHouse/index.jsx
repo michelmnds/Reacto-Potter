@@ -1,8 +1,10 @@
 import "./style.css";
 import ReactModal from "react-modal";
 import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import { HouseContext } from "../../providers/HouseContext";
 import { useContext } from "react";
+import xLogo from "../../assets/x.png";
 //modalType = "create" or "update" to differenciate functions to use
 export const ModalHouse = ({
   isModalOpen,
@@ -51,28 +53,52 @@ export const ModalHouse = ({
             left: "30vw",
             right: "30vw",
             bottom: "30vh",
+            backgroundColor: "#242424",
+            textAlign: "center",
+            border: "0.15rem solid #b36900",
+            borderRadius: "1rem",
+          },
+          overlay: {
+            backgroundColor: "rgba(14, 14, 14, 0.75)",
           },
         }}
       >
         <h2 className="modalHeading">
           {modalType === "create" ? "Create new house" : "Update your house"}
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="modalForm" onSubmit={handleSubmit(onSubmit)}>
           <input
             defaultValue={defaultValues.name}
-            {...register("name")}
+            {...register("name", {
+              required: "This input is required.",
+              minLength: {
+                value: 3,
+                message: "The name must be between 3 and 13 characters",
+              },
+              maxLength: {
+                value: 13,
+                message: "The name must be between 3 and 13 characters",
+              },
+            })}
             placeholder="House Name"
           />
           <input
             defaultValue={defaultValues.image}
-            {...register("image")}
+            {...register("image", { required: true })}
             placeholder="House Image Link"
           />
-          <input type="submit" />
+          <input
+            type="submit"
+            className="houseFormSubmit"
+            value={modalType === "create" ? "Create House" : "Update House"}
+          />
         </form>
-        <button type="button" onClick={handleCloseModal}>
-          close
-        </button>
+        <img
+          className="closeIcon"
+          src={xLogo}
+          alt="close modal"
+          onClick={handleCloseModal}
+        />
       </ReactModal>
     </>
   );

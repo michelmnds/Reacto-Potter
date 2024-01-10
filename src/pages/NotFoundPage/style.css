@@ -1,3 +1,7 @@
-.mainPageContainer {
+.notFoundPageContainer {
   min-height: 100vh;
+  background-image: url("https://media1.popsugar-assets.com/files/thumbor/6hr_HPoaGMreWfBaxu9Xly44UAk=/1920x1080/top/filters:format_auto():quality(85):extract_cover()/2017/03/30/795/n/1922507/01ca34fbc3e19212_MCDHAP2_EC359_H.JPG");
+}
+.notFoundHeader {
+  margin-top: 0;
 }
