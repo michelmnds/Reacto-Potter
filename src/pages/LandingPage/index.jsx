@@ -38,7 +38,7 @@ export const LandingPage = () => {
 
             <Link to={`/quiz/${currentQuizPage}`}>
               <button className="btnSelect">
-                I don&apos;t know wich one to choose
+                I don&apos;t know which one to choose
               </button>
             </Link>
           </div>

@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 export const Header = () => {
   return (
     <div className="headerContainer">
-      <img className="logo" src={logo} alt="Logo" />
+      <Link to="/home">
+        <img className="logo" src={logo} alt="Logo" />
+      </Link>
 
       <div className="rightSide">
-        <Link to="/home">
+        <Link to="/house">
           <img className="home" src={home} alt="" />
         </Link>
         <Link to="/" onClick={() => localStorage.clear()}>
