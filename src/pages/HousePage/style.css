@@ -67,6 +67,10 @@
 .createHouseBtn {
 }
 
+.mainPageContainer {
+  min-height: 100vh;
+}
+
 @media (width >= 896px) {
   .mainHousesContainer {
     flex-wrap: wrap;

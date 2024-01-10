@@ -10,6 +10,7 @@ import x from "../../assets/x.png";
 import info from "../../assets/info.png";
 
 import "./style.css";
+import { Footer } from "../../components/Footer";
 const houseNames = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
 export const HousePage = () => {
   const { houses, deleteHouse } = useContext(HouseContext);
@@ -33,89 +34,92 @@ export const HousePage = () => {
   return (
     <>
       <Header />
-      <h1 className="houseTitle">Manage your Houses</h1>
+      <div className="mainPageContainer">
+        <h1 className="houseTitle">Manage your Houses</h1>
 
-      <div className="houseContainer">
-        <span className="mainTitle">Main houses</span>
-        <div className="mainHousesContainer">
-          {houses.length ? (
-            houses.map((house) => {
-              if (houseNames.includes(house.name)) {
-                return (
-                  <HouseCard
-                    key={house.id}
-                    image={house.image}
-                    name={house.name}
-                  />
-                );
-              }
-            })
-          ) : (
-            <div
-              style={{ backgroundColor: "#1a1a1a", width: 300, height: 306 }}
-            />
-          )}
+        <div className="houseContainer">
+          <span className="mainTitle">Main houses</span>
+          <div className="mainHousesContainer">
+            {houses.length ? (
+              houses.map((house) => {
+                if (houseNames.includes(house.name)) {
+                  return (
+                    <HouseCard
+                      key={house.id}
+                      image={house.image}
+                      name={house.name}
+                    />
+                  );
+                }
+              })
+            ) : (
+              <div
+                style={{ backgroundColor: "#1a1a1a", width: 300, height: 306 }}
+              />
+            )}
+          </div>
+
+          <span className="mainTitle">Custom Houses</span>
+
+          <div className="customHousesContainer">
+            {houses.length ? (
+              houses.map((house) => {
+                if (!houseNames.includes(house.name)) {
+                  return (
+                    <HouseCard
+                      key={house.id}
+                      image={house.image}
+                      name={house.name}
+                    >
+                      <div className="iconContainer">
+                        <img
+                          className="icon"
+                          src={info}
+                          alt="update house"
+                          onClick={() =>
+                            handleOpenModal(
+                              "update",
+                              house.id,
+                              house.name,
+                              house.image
+                            )
+                          }
+                        />
+                        <img
+                          className="icon"
+                          src={x}
+                          alt="delete house"
+                          onClick={() => deleteHouse(house.id)}
+                        />
+                      </div>
+                    </HouseCard>
+                  );
+                }
+              })
+            ) : (
+              <div
+                style={{ backgroundColor: "#1a1a1a", width: 300, height: 306 }}
+              />
+            )}
+          </div>
+
+          <button
+            className="createHouseBtn"
+            onClick={() => handleOpenModal("create")}
+          >
+            Create new house
+          </button>
+          <ModalHouse
+            isModalOpen={isModalOpen}
+            handleCloseModal={handleCloseModal}
+            modalType={modalType}
+            houseIdToBeUpdated={houseIdToBeUpdated}
+            houseName={houseName}
+            houseImage={houseImage}
+          />
         </div>
-
-        <span className="mainTitle">Custom Houses</span>
-
-        <div className="customHousesContainer">
-          {houses.length ? (
-            houses.map((house) => {
-              if (!houseNames.includes(house.name)) {
-                return (
-                  <HouseCard
-                    key={house.id}
-                    image={house.image}
-                    name={house.name}
-                  >
-                    <div className="iconContainer">
-                      <img
-                        className="icon"
-                        src={info}
-                        alt="update house"
-                        onClick={() =>
-                          handleOpenModal(
-                            "update",
-                            house.id,
-                            house.name,
-                            house.image
-                          )
-                        }
-                      />
-                      <img
-                        className="icon"
-                        src={x}
-                        alt="delete house"
-                        onClick={() => deleteHouse(house.id)}
-                      />
-                    </div>
-                  </HouseCard>
-                );
-              }
-            })
-          ) : (
-            <div
-              style={{ backgroundColor: "#1a1a1a", width: 300, height: 306 }}
-            />
-          )}
-        </div>
-
-        <button
-          className="createHouseBtn"
-          onClick={() => handleOpenModal("create")}
-        >
-          Create new house
-        </button>
-        <ModalHouse
-          isModalOpen={isModalOpen}
-          handleCloseModal={handleCloseModal}
-          modalType={modalType}
-          houseIdToBeUpdated={houseIdToBeUpdated}
-          houseName={houseName}
-          houseImage={houseImage}
-        />
       </div>
+      <Footer />
     </>
   );
 };

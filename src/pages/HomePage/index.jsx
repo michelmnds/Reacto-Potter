@@ -3,6 +3,7 @@ import { CharactersContext } from "../../providers/CharacterContext";
 import { UserContext } from "../../providers/UserContext";
 import { Header } from "../../components/Header";
 import "./style.css";
+import { Footer } from "../../components/Footer";
 
 export const HomePage = () => {
   // eslint-disable-next-line no-unused-vars
@@ -18,19 +19,21 @@ export const HomePage = () => {
   return (
     <>
       <Header />
-
-      <h1 className="title">
-        All characters
-        {currentHouse === null || currentHouse === "none"
-          ? ""
-          : ` of house ${currentHouse}`}
-      </h1>
-      {/* <button type="button" onClick={triggerRefresh}>
+      <div className="mainPageContainer">
+        <h1 className="title">
+          All characters
+          {currentHouse === null || currentHouse === "none"
+            ? ""
+            : ` of house ${currentHouse}`}
+        </h1>
+        {/* <button type="button" onClick={triggerRefresh}>
         Refresh
       </button> */}
-      <ul className="charList">{renderCharacters()}</ul>
+        <ul className="charList">{renderCharacters()}</ul>
 
-      {renderPages()}
+        {renderPages()}
+      </div>
+      <Footer />
     </>
   );
 };
