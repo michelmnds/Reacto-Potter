@@ -1,5 +1,6 @@
 .quizQuestion {
   text-align: center;
+  font-size: 3rem;
 }
 
 .quizAnswersCtn {
@@ -12,10 +13,30 @@
 
 .quizAnswerCard {
   border: 0.15rem solid #b36900;
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin: 0 1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 1rem;
   text-align: center;
+  font-size: 1.5rem;
+  color: #b36900;
+  background-color: #0e0e0e;
+  transition: transform 0.3s ease;
+}
+
+.quizAnswerCard:hover {
+  color: #b36900;
+  transform: scale(1.02);
+}
+
+.resultsButton {
+  border: 0.15rem solid #b36900;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #b36900;
+  background-color: #0e0e0e;
 }
 
 .resultEmblem {

@@ -96,6 +96,10 @@ export const HouseQuizPage = () => {
                   your the house!
                 </p>
                 <p>{resultDescription[selectedHouse]}</p>
+                <Link to={`/quiz/1`} onClick={resetQuizState}>
+                  I am not happy with the house I got and would like to start
+                  over
+                </Link>
               </div>
             ) : (
               <button
@@ -106,10 +110,6 @@ export const HouseQuizPage = () => {
                 Calculate Results
               </button>
             )}
-
-            <Link to={`/quiz/1`} onClick={resetQuizState}>
-              I am not happy with the house I got and would like to start over
-            </Link>
           </div>
         ) : (
           <div className="quizCtn">
