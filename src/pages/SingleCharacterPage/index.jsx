@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Header } from "../../components/Header";
 
 import "./style.css";
+import { Footer } from "../../components/Footer";
 
 export const SingleCharacterPage = () => {
   const { charId } = useParams();
@@ -16,7 +17,8 @@ export const SingleCharacterPage = () => {
   return (
     <>
       <Header />
-      {renderOneCharacter()}
+      <div className="mainPageContainer">{renderOneCharacter()}</div>
+      <Footer />
     </>
   );
 };
