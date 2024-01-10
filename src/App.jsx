@@ -4,6 +4,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { HousePage } from "./pages/HousePage";
 import { SingleCharacterPage } from "./pages/SingleCharacterPage";
 import { HouseQuizPage } from "./pages/HouseQuizPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route element={<HouseQuizPage />} path="/quiz/:quizpage"></Route>
       <Route element={<HousePage />} path="/house" />
       <Route element={<SingleCharacterPage />} path="/character/:charId" />
+      <Route element={<NotFoundPage />} path="/*" />
     </Routes>
   );
 }
