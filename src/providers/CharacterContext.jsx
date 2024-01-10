@@ -2,10 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "./UserContext";
 import { Link } from "react-router-dom";
-import ravenclaw from "../assets/ravenclaw.png";
-import hufflepuff from "../assets/hufflepuff.png";
-import slytherin from "../assets/slytherin.png";
-import gryffindor from "../assets/gryffindor.png";
 
 export const CharactersContext = createContext();
 
@@ -74,6 +70,59 @@ const CharactersContextProvider = ({ children }) => {
       .map((character) => {
         //Render cards based on characters house (uses Switch)
         switch (character.house) {
+          case "":
+            return (
+              <li
+                style={{ borderRight: "5px solid white" }}
+                className="card"
+                key={character.id}
+              >
+                {character.image ? (
+                  <div
+                    style={{
+                      borderLeft: "5px solid white",
+                      backgroundImage: `url(${character.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "top",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      borderLeft: "5px solid white",
+                      backgroundImage: `url(https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Hogwarts-Crest.png/600px-Hogwarts-Crest.png?20210328175300)`,
+                      backgroundSize: 95,
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                    alt={character.name}
+                    className="charImg"
+                  />
+                )}
+
+                <div className="charInfos">
+                  <Link
+                    style={{ color: "white" }}
+                    className="charName"
+                    to={`/character/${character.id}`}
+                  >
+                    {character.name}
+                  </Link>
+                  <span className="charHouse">
+                    <strong>House: </strong>
+                    None
+                  </span>
+                  {character.patronus && (
+                    <span className="charPatronus">
+                      <strong>Patronus animal: </strong>
+                      {character.patronus}
+                    </span>
+                  )}
+                </div>
+              </li>
+            );
           case "Slytherin":
             return (
               <li
@@ -96,7 +145,7 @@ const CharactersContextProvider = ({ children }) => {
                   <div
                     style={{
                       borderLeft: "5px solid #2a623d",
-                      backgroundImage: `url(${slytherin})`,
+                      backgroundImage: `url(https://i.imgur.com/gf7YOJY.png)`,
                       backgroundSize: 80,
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
@@ -149,7 +198,7 @@ const CharactersContextProvider = ({ children }) => {
                   <div
                     style={{
                       borderLeft: "5px solid #ae0001",
-                      backgroundImage: `url(${gryffindor})`,
+                      backgroundImage: `url(https://i.imgur.com/fGIqoaj.png)`,
                       backgroundSize: 80,
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
@@ -202,7 +251,7 @@ const CharactersContextProvider = ({ children }) => {
                   <div
                     style={{
                       borderLeft: "5px solid #222f5b",
-                      backgroundImage: `url(${ravenclaw})`,
+                      backgroundImage: `url(https://i.imgur.com/CU46bgb.png)`,
                       backgroundSize: 80,
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
@@ -255,7 +304,7 @@ const CharactersContextProvider = ({ children }) => {
                   <div
                     style={{
                       borderLeft: "5px solid #ecb939",
-                      backgroundImage: `url(${hufflepuff})`,
+                      backgroundImage: `url(https://i.imgur.com/NaiP4DS.png)`,
                       backgroundSize: 80,
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
@@ -292,12 +341,74 @@ const CharactersContextProvider = ({ children }) => {
 
   const renderOneCharacter = () => {
     return (
-      <div>
-        <h1>{character.name}</h1>
-        <img src={character.image} alt={character.name} />
-        <p>House: {character.house}</p>
-        {character.patronus && <p>Patronus animal: {character.patronus}</p>}
-      </div>
+      <>
+        {character.image ? (
+          <div className="imgContainer">
+            <div
+              className="oneCharSecondImg"
+              style={{ backgroundImage: `url(${character.image})` }}
+              alt={character.name}
+            />
+            <div
+              className="oneCharImg"
+              style={{ backgroundImage: `url(${character.image})` }}
+              alt={character.name}
+            ></div>
+          </div>
+        ) : (
+          <div
+            className="iconImg"
+            style={{
+              backgroundImage: `url(https://cdn-icons-png.flaticon.com/512/266/266033.png)`,
+            }}
+            alt={character.name}
+          ></div>
+        )}
+        <div className="oneCharContainer">
+          <div className="oneCharNameContainer">
+            <span className="oneCharName">{character.name}</span>
+
+            {character.wizard ? (
+              <span className="oneCharWizz"> (Wizard) </span>
+            ) : (
+              <span className="oneCharWizz"> (Muggle) </span>
+            )}
+          </div>
+
+          {character.house !== "" ? (
+            <span className="oneCharHouse">
+              <strong>House: </strong> {character.house}
+            </span>
+          ) : (
+            <span className="oneCharHouse">
+              <strong>House: </strong>None
+            </span>
+          )}
+          <span className="oneCharSpecies">
+            <strong>Species: </strong>
+            {character.species}
+          </span>
+          <span className="oneCharGender">
+            <strong>Gender: </strong> {character.gender}
+          </span>
+          {character.yearOfBirth ? (
+            <span className="oneCharAge">
+              <strong>Age: </strong> {2024 - character.yearOfBirth}
+            </span>
+          ) : (
+            <span className="oneCharAge">
+              <strong>Age: </strong> Unknown
+            </span>
+          )}
+          {character.patronus && (
+            <span>
+              <strong>Patronus Animal: </strong>{" "}
+              {character.patronus[0].toUpperCase() +
+                character.patronus.slice(1, character.patronus.length)}
+            </span>
+          )}
+        </div>
+      </>
     );
   };
 
@@ -345,6 +456,7 @@ const CharactersContextProvider = ({ children }) => {
       value={{
         isLoading,
         characters,
+        character,
         fetchCharacters,
         getOneCharacter,
         triggerRefresh,
