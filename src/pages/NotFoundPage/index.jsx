@@ -6,8 +6,10 @@ export const NotFoundPage = () => {
   return (
     <>
       <Header />
-      <div className="mainPageContainer">
-        <h1>404 - Page not found</h1>
+      <div className="notFoundPageContainer">
+        <h1 className="notFoundHeader">
+          The page you are looking for does no longer exist
+        </h1>
       </div>
       <Footer />
     </>
