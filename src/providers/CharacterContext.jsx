@@ -57,11 +57,15 @@ const CharactersContextProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characters]);
 
-  const getOneCharacter = (characterId) => {
-    const oneCharacter = characters.find(
-      (character) => character.id == characterId
-    );
-    return oneCharacter;
+  const getOneCharacter = async (characterId) => {
+    try {
+      const response = await axios.get(
+        `https://hp-api.onrender.com/api/character/${characterId}`
+      );
+      setCharacter(response.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderCharacters = () => {
@@ -339,79 +343,6 @@ const CharactersContextProvider = ({ children }) => {
       });
   };
 
-  const renderOneCharacter = () => {
-    return (
-      <>
-        {character.image ? (
-          <div className="imgContainer">
-            <div
-              className="oneCharSecondImg"
-              style={{ backgroundImage: `url(${character.image})` }}
-              alt={character.name}
-            />
-            <div
-              className="oneCharImg"
-              style={{ backgroundImage: `url(${character.image})` }}
-              alt={character.name}
-            ></div>
-          </div>
-        ) : (
-          <div
-            className="iconImg"
-            style={{
-              backgroundImage: `url(https://cdn-icons-png.flaticon.com/512/266/266033.png)`,
-            }}
-            alt={character.name}
-          ></div>
-        )}
-        <div className="oneCharContainer">
-          <div className="oneCharNameContainer">
-            <span className="oneCharName">{character.name}</span>
-
-            {character.wizard ? (
-              <span className="oneCharWizz"> (Wizard) </span>
-            ) : (
-              <span className="oneCharWizz"> (Muggle) </span>
-            )}
-          </div>
-
-          {character.house !== "" ? (
-            <span className="oneCharHouse">
-              <strong>House: </strong> {character.house}
-            </span>
-          ) : (
-            <span className="oneCharHouse">
-              <strong>House: </strong>None
-            </span>
-          )}
-          <span className="oneCharSpecies">
-            <strong>Species: </strong>
-            {character.species}
-          </span>
-          <span className="oneCharGender">
-            <strong>Gender: </strong> {character.gender}
-          </span>
-          {character.yearOfBirth ? (
-            <span className="oneCharAge">
-              <strong>Age: </strong> {2024 - character.yearOfBirth}
-            </span>
-          ) : (
-            <span className="oneCharAge">
-              <strong>Age: </strong> Unknown
-            </span>
-          )}
-          {character.patronus && (
-            <span>
-              <strong>Patronus Animal: </strong>{" "}
-              {character.patronus[0].toUpperCase() +
-                character.patronus.slice(1, character.patronus.length)}
-            </span>
-          )}
-        </div>
-      </>
-    );
-  };
-
   const handlePageChange = (change) => {
     if (currentPage + change > 0 && currentPage + change <= totalPages)
       setCurrentPage(currentPage + change);
@@ -462,7 +393,6 @@ const CharactersContextProvider = ({ children }) => {
         triggerRefresh,
         renderCharacters,
         setCharacter,
-        renderOneCharacter,
         renderPages,
       }}
     >
