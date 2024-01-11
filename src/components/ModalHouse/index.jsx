@@ -46,17 +46,8 @@ export const ModalHouse = ({
         shouldCloseOnOverlayClick={true}
         onAfterOpen={handleInitialValue}
         onRequestClose={handleCloseModal}
+        className="modalContentCtn"
         style={{
-          content: {
-            top: "30vh",
-            left: "30vw",
-            right: "30vw",
-            bottom: "30vh",
-            backgroundColor: "#242424",
-            textAlign: "center",
-            border: "0.15rem solid #b36900",
-            borderRadius: "1rem",
-          },
           overlay: {
             backgroundColor: "rgba(14, 14, 14, 0.75)",
           },
