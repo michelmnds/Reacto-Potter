@@ -1,0 +1,94 @@
+.modalText {
+  color: black;
+}
+
+.modalHeading {
+  color: white;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.modalConfirmationBtnCtn {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalConfirmationDeleteBtn {
+  background-color: darkred;
+}
+
+.modalConfirmationCancelBtn {
+  background-color: #242424;
+  color: #b36900;
+  border: #b36900 solid 2px;
+}
+
+/*.houseFormInput {
+  color: #b36900;
+  background-color: #0e0e0e;
+  border-radius: 1rem;
+  border: #b36900 solid 0.15rem;
+  padding: 0.3rem;
+}*/
+
+.closeIcon {
+  width: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.closeIcon:hover {
+  transform: scale(1.3);
+}
+
+/*
+.houseFormSubmit {
+  border: 0.15rem solid #b36900;
+  border-radius: 1rem;
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #b36900;
+  background-color: #0e0e0e;
+  transition: transform 0.3s ease;
+}
+
+.houseFormSubmit:hover {
+  transform: scale(1.05);
+}*/
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.ReactModal__Content {
+  transform: translateY(-100%);
+  transition: transform 500ms ease-out;
+}
+
+.modalConfirmationContentCtn {
+  margin: 25vh 10vw 30vh 10vw;
+  padding: 5vh 1vw;
+  background-color: #242424;
+  text-align: center;
+  border: 0.15rem solid #b36900;
+  border-radius: 1rem;
+}
+
+.ReactModal__Content--after-open {
+  transform: translateY(0);
+}
+
+@media (width >= 768px) {
+  .modalConfirmationContentCtn {
+    margin: 25vh 40vw 30vh 40vw;
+  }
+}

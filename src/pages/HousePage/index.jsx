@@ -4,6 +4,7 @@ import { Header } from "../../components/Header";
 import { HouseCard } from "../../components/HouseCard";
 import { useContext } from "react";
 import { HouseContext } from "../../providers/HouseContext";
+import { ModalConfirmation } from "../../components/ModalConfirmation";
 import ReactModal from "react-modal";
 
 import x from "../../assets/x.png";
@@ -13,8 +14,9 @@ import "./style.css";
 import { Footer } from "../../components/Footer";
 const houseNames = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
 export const HousePage = () => {
-  const { houses, deleteHouse } = useContext(HouseContext);
+  const { houses } = useContext(HouseContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [modalType, setModalType] = useState("");
   const [houseIdToBeUpdated, setHouseIdToBeUpdated] = useState(0);
   const [houseName, setHouseName] = useState("");
@@ -28,6 +30,11 @@ export const HousePage = () => {
     setHouseIdToBeUpdated(houseChangeId);
     setIsModalOpen(true);
   };
+  const handleOpenConfirmationModal = (houseChangeId) => {
+    setHouseIdToBeUpdated(houseChangeId);
+    setIsConfirmationModalOpen(true);
+  };
+  const handleCloseConfirmationModal = () => setIsConfirmationModalOpen(false);
   const handleCloseModal = () => setIsModalOpen(false);
   //accessibility setting
   ReactModal.setAppElement("#root");
@@ -89,7 +96,7 @@ export const HousePage = () => {
                           className="icon"
                           src={x}
                           alt="delete house"
-                          onClick={() => deleteHouse(house.id)}
+                          onClick={() => handleOpenConfirmationModal(house.id)}
                         />
                       </div>
                     </HouseCard>
@@ -116,6 +123,11 @@ export const HousePage = () => {
             houseIdToBeUpdated={houseIdToBeUpdated}
             houseName={houseName}
             houseImage={houseImage}
+          />
+          <ModalConfirmation
+            isModalOpen={isConfirmationModalOpen}
+            handleCloseModal={handleCloseConfirmationModal}
+            houseIdToBeUpdated={houseIdToBeUpdated}
           />
         </div>
       </div>
