@@ -68,6 +68,7 @@ export const ModalHouse = ({
         <form className="modalForm" onSubmit={handleSubmit(onSubmit)}>
           <input
             name="name"
+            className="houseFormInput"
             defaultValue={defaultValues.name}
             {...register("name", {
               required: "This input is required.",
@@ -84,6 +85,7 @@ export const ModalHouse = ({
           />
           <input
             name="image"
+            className="houseFormInput"
             defaultValue={defaultValues.image}
             {...register("image", { required: true })}
             placeholder="House Image Link"
