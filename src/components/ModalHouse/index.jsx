@@ -1,7 +1,6 @@
 import "./style.css";
 import ReactModal from "react-modal";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { HouseContext } from "../../providers/HouseContext";
 import { useContext } from "react";
 import xLogo from "../../assets/x.png";
@@ -68,6 +67,7 @@ export const ModalHouse = ({
         </h2>
         <form className="modalForm" onSubmit={handleSubmit(onSubmit)}>
           <input
+            name="name"
             defaultValue={defaultValues.name}
             {...register("name", {
               required: "This input is required.",
@@ -83,6 +83,7 @@ export const ModalHouse = ({
             placeholder="House Name"
           />
           <input
+            name="image"
             defaultValue={defaultValues.image}
             {...register("image", { required: true })}
             placeholder="House Image Link"
