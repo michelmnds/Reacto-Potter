@@ -7,7 +7,7 @@ import { Footer } from "../../components/Footer";
 
 export const HomePage = () => {
   // eslint-disable-next-line no-unused-vars
-  const { triggerRefresh, renderCharacters, renderPages, fetchCharacters } =
+  const { renderCharacters, renderPages, fetchCharacters } =
     useContext(CharactersContext);
   const { currentHouse } = useContext(UserContext);
 
@@ -26,9 +26,6 @@ export const HomePage = () => {
             ? ""
             : ` of house ${currentHouse}`}
         </h1>
-        {/* <button type="button" onClick={triggerRefresh}>
-        Refresh
-      </button> */}
         <ul className="charList">{renderCharacters()}</ul>
 
         {renderPages()}

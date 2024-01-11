@@ -1,7 +1,6 @@
 import "./style.css";
 import ReactModal from "react-modal";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import { HouseContext } from "../../providers/HouseContext";
 import { useContext } from "react";
 import xLogo from "../../assets/x.png";
@@ -47,17 +46,8 @@ export const ModalHouse = ({
         shouldCloseOnOverlayClick={true}
         onAfterOpen={handleInitialValue}
         onRequestClose={handleCloseModal}
+        className="modalContentCtn"
         style={{
-          content: {
-            top: "30vh",
-            left: "30vw",
-            right: "30vw",
-            bottom: "30vh",
-            backgroundColor: "#242424",
-            textAlign: "center",
-            border: "0.15rem solid #b36900",
-            borderRadius: "1rem",
-          },
           overlay: {
             backgroundColor: "rgba(14, 14, 14, 0.75)",
           },
@@ -68,23 +58,21 @@ export const ModalHouse = ({
         </h2>
         <form className="modalForm" onSubmit={handleSubmit(onSubmit)}>
           <input
+            name="name"
+            maxLength={13}
+            required
+            className="houseFormInput"
             defaultValue={defaultValues.name}
-            {...register("name", {
-              required: "This input is required.",
-              minLength: {
-                value: 3,
-                message: "The name must be between 3 and 13 characters",
-              },
-              maxLength: {
-                value: 13,
-                message: "The name must be between 3 and 13 characters",
-              },
-            })}
+            {...register("name")}
             placeholder="House Name"
           />
           <input
+            name="image"
+            type="url"
+            required
+            className="houseFormInput"
             defaultValue={defaultValues.image}
-            {...register("image", { required: true })}
+            {...register("image")}
             placeholder="House Image Link"
           />
           <input
