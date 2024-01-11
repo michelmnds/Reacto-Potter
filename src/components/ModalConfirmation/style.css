@@ -1,0 +1,70 @@
+.modalText {
+  color: black;
+}
+
+.modalHeading {
+  color: white;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.modalConfirmationBtnCtn {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalConfirmationDeleteBtn {
+  background-color: darkred;
+}
+
+.modalConfirmationCancelBtn {
+  background-color: #242424;
+  color: #b36900;
+  border: #b36900 solid 2px;
+}
+
+.closeIcon {
+  width: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.closeIcon:hover {
+  transform: scale(1.3);
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.ReactModal__Content {
+  transform: translateY(-100%);
+  transition: transform 500ms ease-out;
+}
+
+.modalConfirmationContentCtn {
+  margin: 25vh 10vw 30vh 10vw;
+  padding: 5vh 1vw;
+  background-color: #242424;
+  text-align: center;
+  border: 0.15rem solid #b36900;
+  border-radius: 1rem;
+}
+
+.ReactModal__Content--after-open {
+  transform: translateY(0);
+}
+
+@media (width >= 1100px) {
+  .modalConfirmationContentCtn {
+    margin: 25vh 40vw 30vh 40vw;
+  }
+}

@@ -70,7 +70,7 @@ const CharactersContextProvider = ({ children }) => {
 
   const renderCharacters = () => {
     return characters
-      .slice(0 + 20 * (currentPage - 1), 19 + 20 * (currentPage - 1))
+      .slice(0 + 20 * (currentPage - 1), 20 + 20 * (currentPage - 1))
       .map((character) => {
         //Render cards based on characters house (uses Switch)
         switch (character.house) {
