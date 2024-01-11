@@ -68,26 +68,20 @@ export const ModalHouse = ({
         <form className="modalForm" onSubmit={handleSubmit(onSubmit)}>
           <input
             name="name"
+            maxLength={13}
+            required
             className="houseFormInput"
             defaultValue={defaultValues.name}
-            {...register("name", {
-              required: "This input is required.",
-              minLength: {
-                value: 3,
-                message: "The name must be between 3 and 13 characters",
-              },
-              maxLength: {
-                value: 13,
-                message: "The name must be between 3 and 13 characters",
-              },
-            })}
+            {...register("name")}
             placeholder="House Name"
           />
           <input
             name="image"
+            type="url"
+            required
             className="houseFormInput"
             defaultValue={defaultValues.image}
-            {...register("image", { required: true })}
+            {...register("image")}
             placeholder="House Image Link"
           />
           <input
